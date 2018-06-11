@@ -1,4 +1,3 @@
-const jsf = require('json-schema-faker');
 
 const skeem = require('../index');
 
@@ -15,6 +14,11 @@ const usersSchema = require('./users.schema');
 store.add(userSchema);
 store.add(usersSchema);
 
-store.generateAll(jsf.resolve);
+store.generateAll();
+
+
+(async () => {
+  console.log(JSON.stringify(await store.readData('user'), null, 2))
+})();
 
 
