@@ -1,31 +1,31 @@
-const jp = require('../lib/props');
+const skeem = require('../index');
 
-const name = jp.merge(
-  jp.string,
-  jp.mock('name.findName')
+const name = skeem.merge(
+  skeem.string,
+  skeem.mock('name.findName')
 );
 
-const email = jp.merge(
-  jp.email('internet.email'), 
-  jp.mock('internet.email')
+const email = skeem.merge(
+  skeem.email('internet.email'), 
+  skeem.mock('internet.email')
 );
 
-const definitions = jp.defs({
-  positiveInt: jp.prop({
+const definitions = skeem.defs({
+  positiveInt: skeem.prop({
     type: 'integer',
     minimum: 0,
     exclusiveMinimum: true
   })
 });
 
-const schema = jp.schema('user');
+const schema = skeem.schema('user');
 
 module.exports = schema(
-  jp.shape({
-    id: jp.$ref('#/definitions/positiveInt'),
+  skeem.shape({
+    id: skeem.$ref('#/definitions/positiveInt'),
     name,
     email
   }),
   definitions,
-  jp.required(['id', 'name', 'email'])
+  skeem.required(['id', 'name', 'email'])
 );

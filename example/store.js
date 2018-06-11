@@ -1,2 +1,2 @@
-const { createStore } = require('../lib/snapshots');
+const { createStore } = require('../index');
 module.exports = createStore();

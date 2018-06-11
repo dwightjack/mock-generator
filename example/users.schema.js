@@ -1,9 +1,9 @@
-const jp = require('../lib/props');
+const { schema, array, $ref } = require('../index');
 const store = require('./store');
 
-const schema = jp.schema('users');
+const usersSchema = schema('users');
 
-module.exports = schema(
-  jp.array(jp.$ref(store.resolve('user'))),
+module.exports = usersSchema(
+  array($ref(store.resolve('user'))),
   { minItems: 5 }
 );
