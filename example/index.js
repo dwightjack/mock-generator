@@ -2,23 +2,21 @@
 const skeem = require('../index');
 
 skeem.configure({
-  mock: 'faker'
+  mocker: 'faker'
 });
 
 const store = require('./store');
-const userSchema = require('./user.schema');
-const usersSchema = require('./users.schema');
-
-
-
-store.add(userSchema);
-store.add(usersSchema);
-
-store.generateAll();
-
 
 (async () => {
-  console.log(JSON.stringify(await store.readData('user'), null, 2))
+  /*await store.loadFrom('./*.schema.js', {
+    cwd: __dirname
+  });
+  await store.generateAll();*/
+  store.watch('./*.schema.js', {
+    cwd: __dirname,
+    immediate: true
+  });
+  //console.log(JSON.stringify(await store.readData('user'), null, 2))
 })();
 
 

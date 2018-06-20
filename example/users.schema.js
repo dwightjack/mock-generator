@@ -5,5 +5,5 @@ const usersSchema = schema('users');
 
 module.exports = usersSchema(
   array($ref(store.resolve('user'))),
-  { minItems: 5 }
+  array.minmax(5)
 );

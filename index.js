@@ -1,7 +1,7 @@
 const utils = require('./lib/utils');
 const keys = require('./lib/keywords');
 const types = require('./lib/types');
-const { createStore } =  require('./lib/snapshots');
+const { createStore } =  require('./lib/store');
 
 const { toJSON } = utils;
 

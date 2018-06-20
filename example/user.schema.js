@@ -1,31 +1,20 @@
-const skeem = require('../index');
+const joi = require('../index');
 
-const name = skeem.merge(
-  skeem.string,
-  skeem.mock('name.findName')
+const email = joi.email('internet.email');
+
+const positiveInt = joi.merge(
+  joi.type('integer'),
+  { minimum : 1, exclusiveMinimum : true }
 );
 
-const email = skeem.merge(
-  skeem.email('internet.email'), 
-  skeem.mock('internet.email')
-);
-
-const definitions = skeem.defs({
-  positiveInt: skeem.prop({
-    type: 'integer',
-    minimum: 0,
-    exclusiveMinimum: true
-  })
-});
-
-const schema = skeem.schema('user');
+const schema = joi.schema('user');
 
 module.exports = schema(
-  skeem.shape({
-    id: skeem.$ref('#/definitions/positiveInt'),
-    name,
+  joi.shape({
+    id: joi.$ref('#/definitions/positiveInt'),
+    name: joi.string('name.findName'),
     email
   }),
-  definitions,
-  skeem.required(['id', 'name', 'email'])
+  joi.defs({ positiveInt }),
+  joi.required(['id', 'name', 'email'])
 );
